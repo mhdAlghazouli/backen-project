@@ -1,37 +1,77 @@
 <%- include('partials/header'); -%>
 
-<header>
-  <div >
-    <h2>To do list</h2>
+
+  
+<div class="container px-3">
+    <h2 class="mt-6 mb-6" style="text-align: center; font-size: 25px;">Your Tasks</h2>
     <% if (data) { %>
-      
-      <div><% data.forEach(function(task){ %>
-        <table style="width: 100%; margin-top: 10px; text-align: center;">
-          <tr>
-            <th>Title</th>
-            <th>Description</th>
-          </tr>
-          <tr>
-            <td> <%- task.title %></td>
-            <td><%- task.description %></td>
-          </tr>
-        </table>
-        <a href="/edit/<%- task._id %>">Edit</a>
-        <a href="/delete/<%- task._id %>">Delete</a>
-          <% }); %></div>
+      <% data.forEach(function(task){ %>
+      <div class="card">
+        <header class="card-header mt-2">
+          <p class="card-header-title">
+            <%- task.title %>
+          </p>
+          <button class="card-header-icon showBtn button is-danger" aria-label="more options" style="height: 100%;" value="<%- task._id %>">
+            Details
+          </button>
+        </header>
+        <div class="card-content" style="display: none;transition: opacity 0.6s linear;" value="<%- task._id %>">
+          <div class="content" style="overflow-wrap: break-word;">
+            
+            <%- task.description %>
+            
+            <br>
+            <time datetime="2022-1-1" class="has-text-danger"><%- task.date %></time>
+          </div>
         </div>
+        <footer class="card-footer mb-3 showFooter" style="display: none;" value="<%- task._id %>">
+          <a href="/edit/<%- task._id %>" class="card-footer-item button has-text-danger">Edit</a>
+          <a href="/delete/<%- task._id %>" class="card-footer-item button has-text-danger">Delete</a>
+        </footer>
+      </div><% }); %>
+    </div>
     <% } 
     else { %>
       <p> No tasks, please create one </p>
       <% } %>
+      <div class="is-flex is-justify-content-center mt-6">
+        <a href="/tasks" class="btn button is-danger" style="width: 50%;">Create a new task</a>
+      </div>
       
-    </div>
-    <div>
-    </div>
-    <a href="/tasks" class="btn">Create a new task</a>
-</header>
+</div>
+      
+    
+    
+  
 
+<script>
 
+  const showBtnArr = document.querySelectorAll(".showBtn");
+  showBtnArr.forEach(btn => {
+    btn.addEventListener("click", event => {
+      const showFooterArr = document.querySelectorAll(".showFooter");
+      const contentDivArr = document.querySelectorAll(".card-content");
+      contentDivArr.forEach(content => {
+        if(content.getAttribute("value") === event.target.value){
+          if(content.style.display === "block"){
+            content.style.display = "none"
+          }else{
+            content.style.display = "block"
+          }
+        }
+      })
+      showFooterArr.forEach(footer => {
+        if(footer.getAttribute("value") === event.target.value){
+          if(footer.style.display === "block"){
+            footer.style.display = "none"
+          }else{
+            footer.style.display = "block"
+          }
+        }
+      });
+    })
+  });
+</script>
 
 
 <%- include('partials/footer'); -%>
