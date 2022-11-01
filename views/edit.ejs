@@ -1,14 +1,14 @@
 
 <%- include('partials/header'); -%>
 
-<form action="/edit/<%= data._id %>" method="POST">
+<form action="/edit/<%= data._id %>" method="POST" class="has-background-danger">
   <input type="hidden" value="<%= data._id %>">
-  <h1>Tasks</h1>
+  <h1 style="font-size: 2.4em; margin-bottom: 40px; color: white; text-align: center;">Tasks</h1>
     <label for="title" >Title</label>
     <input type="text" name="title" class="title" value="<%= data.title %>">
     <label for="description">Description</label>
-    <textarea name="description" id="" cols="30" rows="10" value="<%= data.description %>"></textarea>
-    <button class="taskBtn" id="taskBtn" >Submit</button>
+    <textarea name="description" id="" cols="30" rows="10" value="<%= data.description %>" class="has-text-black pl-4" style="font-size: 25px; font-weight: 600;"></textarea>
+    <button class="taskBtn button has-text-danger" id="taskBtn" style="margin-top: 30px;font-family: monospace;">Submit</button>
   
   <div class="contentTitle" style="margin-top: 50px;"></div>
   <div class="contentDescription" style="margin-top: 50px;"></div>
@@ -21,7 +21,7 @@
     e.preventDefault();
     const title = form.title.value;
     const description = form.description.value;
-    
+    description.color = "red"
 
     
     const res = await fetch(`/edit/<%= data._id %>`, {

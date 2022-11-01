@@ -1,14 +1,14 @@
 <%- include('partials/header'); -%>
 
-<form action="">
+<form action="" class="has-background-danger">
   <h2>Log in</h2>
   <label for="email">Email</label>
   <input type="text" name="email" required>
   <div class="email error"></div>
   <label for="password">Password</label>
-  <input type="text" name="password" required>
+  <input type="password" name="password" required>
   <div class="password error"></div>
-  <button>Log in</button>
+  <button class="button has-text-danger" style="margin-top: 30px;font-family: monospace;">Log in</button>
 </form>
 
 <script>
