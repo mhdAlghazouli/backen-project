@@ -32,7 +32,7 @@
     </div>
     <% } 
     else { %>
-      <p> No tasks, please create one </p>
+      <p class="has-text-danger" style="text-align: center;"> No tasks, please create one </p>
       <% } %>
       <div class="is-flex is-justify-content-center mt-6">
         <a href="/tasks" class="btn button is-danger" style="width: 50%;">Create a new task</a>
@@ -51,6 +51,7 @@
     btn.addEventListener("click", event => {
       const showFooterArr = document.querySelectorAll(".showFooter");
       const contentDivArr = document.querySelectorAll(".card-content");
+      
       contentDivArr.forEach(content => {
         if(content.getAttribute("value") === event.target.value){
           if(content.style.display === "block"){

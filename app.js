@@ -25,7 +25,9 @@ const createToken = (id) => {
 app.use(express.static('public'));
 app.use(express.json());
 app.use(cookieParser());
-
+app.use(express.urlencoded({
+  extended: false
+}));
 // view engine
 app.set('view engine', 'ejs');
 
@@ -60,7 +62,8 @@ app.get('/', requireAuth, async (req, res, next) => {
 });
 app.get('/tasks', requireAuth,  (req, res) => res.render('tasks'));
 app.post('/tasks', async (req, res, next) => {
-        console.log("POST /tasks")
+        console.log("post")
+        console.log(req.body)
         const token = req.cookies.jwt;
         jwt.verify(token, process.env.SECRET_KEY, async (err, decodedToken) => {
           if(err){
@@ -68,8 +71,10 @@ app.post('/tasks', async (req, res, next) => {
           }else {
             const { title, description, date, user } = req.body;
             const task = await Task.create({ title, description, date, user: decodedToken.id });
-            next();
+
+            res.redirect("/")
           }
+          
         });
       
 
@@ -108,6 +113,7 @@ app.post('/edit/:id', (req,res, next) => {
       res.redirect('/')
     }
   });
-})
+});
+
 
 app.use(authRoutes);
