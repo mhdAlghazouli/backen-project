@@ -1,40 +1,19 @@
 
 <%- include('partials/header'); -%>
 
-<form action="/tasks" class="has-background-danger">
+<form action="/tasks" class="has-background-danger" method="POST">
   
   <h1 style="font-size: 2.4em; margin-bottom: 40px; color: white; text-align: center;">New Task</h1>
     <label for="title" >Title</label>
-    <input type="text" name="title" class="title" value="">
+    <input type="text" name="title" class="title">
     <label for="description">Description</label>
-    <textarea name="description" id="" cols="30" rows="10" class="has-text-black pl-4" value="" style="font-size: 25px; font-weight: 600;"></textarea>
-    <button class="taskBtn button has-text-danger" id="taskBtn" style="margin-top: 30px;font-family: monospace;">Submit</button>
+    <textarea name="description" id="" cols="30" rows="10" class="has-text-black pl-4" style="font-size: 25px; font-weight: 600;"></textarea>
+    <button type="submit" class="taskBtn button has-text-danger" id="taskBtn" style="margin-top: 30px;font-family: monospace;">Submit</button>
   
-  <div class="contentTitle" style="margin-top: 50px;"></div>
-  <div class="contentDescription" style="margin-top: 50px;"></div>
+
   
 </form>
 
-<script>
-  const form = document.querySelector("form");
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const title = form.title.value;
-    const description = form.description.value;
-    
 
-    
-    const res = await fetch("/tasks", {
-        method: "POST",
-        body: JSON.stringify({ title, description }),
-        headers: {"Content-Type": "application/json"}
-      });
-      
-      res.json();
-      location.assign("/")
-  });
-
-  
-</script>
 
 <%- include('partials/footer'); -%>

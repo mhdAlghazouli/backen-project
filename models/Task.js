@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
-const User = require("./User")
+const User = require("./User");
 
 const taskSchema = new mongoose.Schema({
   title: {
