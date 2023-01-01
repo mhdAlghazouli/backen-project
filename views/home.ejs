@@ -25,6 +25,7 @@
           </div>
         </div>
         <footer class="card-footer mb-3 showFooter" style="display: none;" value="<%- task._id %>">
+          
           <a href="/edit/<%- task._id %>" class="card-footer-item button has-text-danger">Edit</a>
           <a href="/delete/<%- task._id %>" class="card-footer-item button has-text-danger">Delete</a>
         </footer>
@@ -52,6 +53,7 @@
       const showFooterArr = document.querySelectorAll(".showFooter");
       const contentDivArr = document.querySelectorAll(".card-content");
       
+      
       contentDivArr.forEach(content => {
         if(content.getAttribute("value") === event.target.value){
           if(content.style.display === "block"){
@@ -70,6 +72,7 @@
           }
         }
       });
+      
     })
   });
 </script>
